@@ -6,7 +6,7 @@ public class Exercise2 {
         System.out.println("Nhập vào 1 chuỗi bất kỳ");
         String rdStr = sc.next();
         int size = rdStr.length();
-        boolean status = false;
+        boolean status=false;
 
         int i = 0;
         int j = rdStr.length() - 1;
@@ -24,8 +24,8 @@ public class Exercise2 {
                 j--;
             }
 
-            if (status == true) {
-                System.out.println("Đây là chuỗi đảo nghịch");
+            if (status) {
+                System.out.println("Đây là chuỗi đảo nghịch 1212");
             }
             else {
                 System.out.println("Đây không là chuỗi đảo nghịch");
