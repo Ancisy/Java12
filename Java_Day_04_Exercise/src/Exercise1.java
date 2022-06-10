@@ -13,6 +13,6 @@ public class Exercise1 {
                 outputName += " ";
             }
         }
-        System.out.println("Tên của bạn là : " + outputName);
+        System.out.println("Tên của bạn là :" + outputName);
     }
 }

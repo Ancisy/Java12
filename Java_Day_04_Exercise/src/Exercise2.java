@@ -21,21 +21,21 @@ public class Exercise2 {
         outPut(size, longArray);
     }
 
-    public static void inPut(int n, long[] array) {
-        for (int i = 0; i < n; i++) {
+    public static void inPut(int size, long[] array) {
+        for (int i = 0; i < size; i++) {
             array[i] = sc.nextLong();
         }
     }
 
-    public static void outPut(int n, long[] array) {
-        for (int i = 0; i < n; i++) {
+    public static void outPut(int size, long[] array) {
+        for (int i = 0; i < size; i++) {
             System.out.print(array[i] + "\t");
         }
         System.out.println();
     }
 
-    public static void evenNumberOperation(int n, long[] array) {
-        for (int i = 0; i < n; i++) {
+    public static void evenNumberOperation(int size, long[] array) {
+        for (int i = 0; i < size; i++) {
             if (array[i] % 2 == 0) {
                 array[i] += 1;
             }
