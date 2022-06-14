@@ -4,7 +4,7 @@ public class Exercise1 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập tên của bạn :");
-        String inputName = sc.nextLine();
+        String inputName = sc.nextLine().trim();
         String[] array = inputName.split(" ");
         String outputName = "";
         for (int i = 0; i < array.length; i++) {
