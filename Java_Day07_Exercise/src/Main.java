@@ -17,9 +17,10 @@ public class Main {
         }
 
         //Lựa chọn cầu thủ trong team vào đội hình 1GK - 4DF - 4MF - 2FW
+        System.out.println("Lựa chọn cầu thủ theo đội hình : ");
         ArrayList<Player> myTeam = serviceTeam.getTeamByNumber(allPlayers,1,4,4,2);
         for(Player p : myTeam){
-            System.out.println("cầu thủ " + p);
+            System.out.println(p);
         }
 
 
