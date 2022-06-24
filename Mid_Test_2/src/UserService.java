@@ -40,7 +40,7 @@ public class UserService {
     //Tìm theo mail
     public User findYourMail(ArrayList<User> user,String mail){
         for(User u : user){
-            if(u.getUsername().equals(mail)){
+            if(u.getEmail().equals(mail)){
                 return u;
             }
         }
@@ -51,31 +51,33 @@ public class UserService {
         for(User u : user){
             if(u.getUsername()==username){
                 System.out.println("Username đã tồn tại ");
-                break;
             }else{
                 System.out.println("Sửa username thành công");
+                myUser.setUsername(username);
             }
+            break;
         }
-        myUser.setUsername(username);
+
     }
 
     public void changeEmail(ArrayList<User> user,User myUser, String email){
         for(User u : user){
             if(u.getEmail()==email){
                 System.out.println("Email đã tồn tại ");
-                break;
             }
             else {
                 System.out.println("Sửa email thành công");
+                myUser.setEmail(email);
             }
+            break;
         }
-        myUser.setEmail(email);
+
     }
 
 
     public void changePassword(User myUser, String newPassWord){
         myUser.setPassword(newPassWord);
-
+        System.out.println("Đổi mật khẩu thành công");
     }
 
     //Quên mật khẩu
