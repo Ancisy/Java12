@@ -29,7 +29,7 @@ public class UserService {
     }
 
     public boolean checkPassWord(ArrayList<User> user, String passWord){
-        boolean flag = true;
+        boolean flag = false;
         for(User u : user ){
             if(u.getPassword().equals(passWord)) {
                 flag = true;

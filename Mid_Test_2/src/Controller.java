@@ -12,31 +12,26 @@ public class Controller {
     }
 
     public void main() {
-        Util.menu();
+        Util.menuLogin();
         sc = new Scanner(System.in);
         System.out.println("Lựa chọn của bạn là : ");
         int choose = Integer.parseInt(sc.nextLine());
+        boolean flag = false;
+        boolean status = false;
         while (true) {
             switch (choose) {
                 case 1:
-                    System.out.println("Nhập username : ");
-                    String userName = sc.nextLine();
-                    boolean flag = false;
-                    boolean status = false;
-                    if (flag = checkUserName(userName)) {
-                        System.out.println("Nhập password : ");
-                        String passWord = sc.nextLine();
-                        if (flag = checkPassWord(passWord)) {
-                            System.out.println("Chúc bạn " + userName + " đăng nhập thành công bạn có thể thực hiện các công việc sau ");
-                            subMenuMain();
-                            break;
+                        if (flag = checkUserName()) {
+                            if (status = checkPassWord()) {
+                                System.out.println("Chúc bạn " + " đăng nhập thành công bạn có thể thực hiện các công việc sau ");
+                                subMenuMain();
+                            } else {
+                                subMenuLogin();
+                            }
                         } else {
-                            System.out.println("Quên password: ");
+                            System.out.println("Nhập lại username bạn ei ");
                         }
-                    } else {
-                        System.out.println("Nhập lại password: ");
-                    }
-                    break;
+                        break;
                 case 2:
                     break;
                 default:
@@ -45,6 +40,11 @@ public class Controller {
         }
     }
 
+    public void subMenuLogin(){
+        Util.subMenuLogin();
+        System.out.println("Lựa chọn của bạn là : ");
+        int choose = Integer.parseInt(sc.nextLine());
+    }
     public void subMenuMain() {
         Util.subMenu();
         System.out.println("Lựa chọn của bạn là : ");
@@ -77,12 +77,16 @@ public class Controller {
         service.show(myUser);
     }
 
-    public boolean checkUserName(String userName) {
+    public boolean checkUserName() {
+        System.out.println("Nhập username : ");
+        String userName = sc.nextLine();
         boolean flag = service.checkUserName(myUser, userName);
         return flag;
     }
 
-    public boolean checkPassWord(String passWord) {
+    public boolean checkPassWord() {
+        System.out.println("Nhập password : ");
+        String passWord = sc.nextLine();
         boolean flag = service.checkPassWord(myUser, passWord);
         return flag;
     }
