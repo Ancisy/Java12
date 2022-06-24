@@ -21,9 +21,13 @@ public class Controller {
         while (true) {
             switch (choose) {
                 case 1:
-                        if (flag = checkUserName()) {
-                            if (status = checkPassWord()) {
-                                System.out.println("Chúc bạn " + " đăng nhập thành công bạn có thể thực hiện các công việc sau ");
+                    System.out.println("Nhập username : ");
+                    String userName = sc.nextLine();
+                        if (flag = checkUserName(userName)) {
+                            System.out.println("Nhập password : ");
+                            String passWord = sc.nextLine();
+                            if (status = checkPassWord(passWord)) {
+                                System.out.println("Chúc bạn " + userName + " đăng nhập thành công bạn có thể thực hiện các công việc sau ");
                                 subMenuMain();
                             } else {
                                 subMenuLogin();
@@ -44,6 +48,11 @@ public class Controller {
         Util.subMenuLogin();
         System.out.println("Lựa chọn của bạn là : ");
         int choose = Integer.parseInt(sc.nextLine());
+        while (true) {
+            switch(choose){
+                case 1:
+            }
+        }
     }
     public void subMenuMain() {
         Util.subMenu();
@@ -77,16 +86,12 @@ public class Controller {
         service.show(myUser);
     }
 
-    public boolean checkUserName() {
-        System.out.println("Nhập username : ");
-        String userName = sc.nextLine();
+    public boolean checkUserName(String userName) {
         boolean flag = service.checkUserName(myUser, userName);
         return flag;
     }
 
-    public boolean checkPassWord() {
-        System.out.println("Nhập password : ");
-        String passWord = sc.nextLine();
+    public boolean checkPassWord(String passWord) {
         boolean flag = service.checkPassWord(myUser, passWord);
         return flag;
     }
