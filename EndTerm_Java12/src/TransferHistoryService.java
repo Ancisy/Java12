@@ -11,7 +11,7 @@ public class TransferHistoryService {
     public void showTransferHistory(){
         System.out.println("Danh sách history ");
         for(TransferHistory h : history){
-            System.out.println(h.getId() + " - " + h.getDescription() + " - " + h.getReceiverSTK() +" - " + h.getTransferDate() + " - " + h.getMoney());
+            System.out.println(h);
         }
     }
 }

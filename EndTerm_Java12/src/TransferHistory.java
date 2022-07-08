@@ -58,4 +58,9 @@ public class TransferHistory {
     public void setMoney(long money) {
         this.money = money;
     }
+
+    @Override
+    public String toString() {
+        return id + " - " + transferDate + " - " + description + " - " + receiverSTK + " - " + money;
+    }
 }
