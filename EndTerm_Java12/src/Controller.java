@@ -1,21 +1,27 @@
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Controller {
     ArrayList<Account> listAccount;
     AccService service;
+
     ArrayList<MoneyReceiver> listReceiver;
     MoneyRecervierService serviceReceiver;
 
-    ArrayList<TransferHistory> history;
-
+    ArrayList<TransferHistory> transferHistory;
+    TransferHistoryService serviceTransferHistory;
     Scanner sc;
 
     public Controller(){
         service = new AccService();
         serviceReceiver = new MoneyRecervierService();
+
         listAccount = service.getAllUser();
         listReceiver = serviceReceiver.getAllReceiver();
-        history = new ArrayList<>();
+
+        serviceTransferHistory = new TransferHistoryService();
         sc = new Scanner(System.in);
     }
     public void main(){
@@ -76,16 +82,20 @@ public class Controller {
                     long sendMoney = checkSendMoney(yourAccount);
                     System.out.println("Nhập số tài khoản bạn cần chuyển");
                     String stk = sc.nextLine();
+                    System.out.println("Nhập mô tả");
+                    String description = sc.nextLine();
                     stk = checkReceiver(listReceiver,stk);
                     if(stk != null){
                         System.out.println("Tiền chuyển đi thành công");
                         transferMoney(yourAccount,listReceiver,sendMoney,stk);
+                        //lưu thông tin vào lịch sử
+                        transferHistory = serviceTransferHistory.saveTransferHistory(Date.valueOf(LocalDate.now()),description,stk,sendMoney);
                     }else{
                         System.out.println("Tiền chuyển đi không thành công");
                     }
                     break;
                 case 3 :
-
+                    serviceTransferHistory.showTransferHistory();
                     break;
                 case 0 :
                     System.exit(0);
@@ -110,7 +120,7 @@ public class Controller {
                 flag = false;
                 return money;
             } else {
-                System.out.println("Số tiền của bạn không đặt yêu cầu, yêu cầu nhập lại ");
+                System.out.println("Số tiền của bạn không đạt yêu cầu, yêu cầu nhập lại ");
                 flag = true;
             }
         }
@@ -142,6 +152,4 @@ public class Controller {
             }
         }
     }
-
-
 }
