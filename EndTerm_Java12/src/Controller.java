@@ -6,6 +6,7 @@ public class Controller {
     ArrayList<MoneyReceiver> listReceiver;
     MoneyRecervierService serviceReceiver;
 
+    ArrayList<TransferHistory> history;
 
     Scanner sc;
 
@@ -14,6 +15,7 @@ public class Controller {
         serviceReceiver = new MoneyRecervierService();
         listAccount = service.getAllUser();
         listReceiver = serviceReceiver.getAllReceiver();
+        history = new ArrayList<>();
         sc = new Scanner(System.in);
     }
     public void main(){
@@ -74,7 +76,13 @@ public class Controller {
                     long sendMoney = checkSendMoney(yourAccount);
                     System.out.println("Nhập số tài khoản bạn cần chuyển");
                     String stk = sc.nextLine();
-                    transferMoney(yourAccount,listReceiver,sendMoney,stk);
+                    stk = checkReceiver(listReceiver,stk);
+                    if(stk != null){
+                        System.out.println("Tiền chuyển đi thành công");
+                        transferMoney(yourAccount,listReceiver,sendMoney,stk);
+                    }else{
+                        System.out.println("Tiền chuyển đi không thành công");
+                    }
                     break;
                 case 3 :
 
@@ -98,7 +106,7 @@ public class Controller {
         while (flag) {
             System.out.println("Nhập số tiền bạn muốn chuyển ");
             money = Long.parseLong(sc.nextLine());
-            if (money > 50000 && money <(yourAccount.getDepositsMoney()-50000)) {
+            if (money >= 50000 && money <=(yourAccount.getDepositsMoney()-50000)) {
                 flag = false;
                 return money;
             } else {
@@ -109,15 +117,25 @@ public class Controller {
         return money;
     }
 
-    //Gửi tiền qua tài khoản khác
-    public void transferMoney(Account yourAccount,ArrayList<MoneyReceiver> listReceriver,Long sendMoney, String receiverSTK) {
+    //Kiểm tra tài khoản nhận tiền
+    public String checkReceiver(ArrayList<MoneyReceiver> listReceriver, String receiverSTK) {
+        for(MoneyReceiver r: listReceriver){
+            if(r.getStk().equals(receiverSTK)){
+                return receiverSTK;
+            }
+        }
+        return null;
+    }
+
+    //Hoàn Thành Gửi Tiền
+    public void transferMoney(Account yourAccount,ArrayList<MoneyReceiver> listReceriver,Long sendMoney, String receiverSTK){
         long yourMoney = yourAccount.getDepositsMoney()-sendMoney;
         yourAccount.setDepositsMoney(yourMoney);
         System.out.println("Số tài khoản của bạn sau khi gửi tiền đi " + yourAccount.getDepositsMoney() );
 
-        for(MoneyReceiver r: listReceriver){
-            if(r.getStk().equals(receiverSTK)){
-                System.out.println("Tài khoản "+ receiverSTK + " đã nhận được tiền ");
+        for(MoneyReceiver r: listReceriver) {
+            if (r.getStk().equals(receiverSTK)) {
+                System.out.println("Tài khoản " + receiverSTK + " đã nhận được tiền ");
                 long money = r.getDepositMoney() + sendMoney;
                 r.setDepositMoney(money);
                 System.out.println("Tài khoản " + receiverSTK + " có số tiền là : " + r.getDepositMoney());
