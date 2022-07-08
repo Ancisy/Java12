@@ -11,8 +11,8 @@ public class TransferHistory {
     public TransferHistory() {
     }
 
-    public TransferHistory(String id, Date transferDate, String description, String receiverSTK, long money) {
-        this.id = id;
+    public TransferHistory(Date transferDate, String description, String receiverSTK, long money) {
+        this.id = Util.randomId(3);
         this.transferDate = transferDate;
         this.description = description;
         this.receiverSTK = receiverSTK;

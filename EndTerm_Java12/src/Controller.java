@@ -5,6 +5,8 @@ public class Controller {
     AccService service;
     ArrayList<MoneyReceiver> listReceiver;
     MoneyRecervierService serviceReceiver;
+
+
     Scanner sc;
 
     public Controller(){
@@ -92,15 +94,16 @@ public class Controller {
     //Kiểm tra số tiền gửi đi
     public long checkSendMoney(Account yourAccount) {
         long money = 0;
-        System.out.println("Nhập số tiền bạn muốn chuyển ");
-        money = Long.parseLong(sc.nextLine());
         boolean flag = true;
         while (flag) {
-            if (money > 50000 && money > yourAccount.getDepositsMoney()) {
+            System.out.println("Nhập số tiền bạn muốn chuyển ");
+            money = Long.parseLong(sc.nextLine());
+            if (money > 50000 && money <(yourAccount.getDepositsMoney()-50000)) {
                 flag = false;
                 return money;
             } else {
-                flag = false;
+                System.out.println("Số tiền của bạn không đặt yêu cầu, yêu cầu nhập lại ");
+                flag = true;
             }
         }
         return money;
